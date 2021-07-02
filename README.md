@@ -1,4 +1,4 @@
-# Recipe Application CSCI320 RIT.CS.EDU
+## Recipe Application CSCI320 RIT.CS.EDU
 
 # Description
 - This application is uses Postgres database to build a functional CRUD Recipe Interface
