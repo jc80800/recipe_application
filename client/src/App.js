@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Login from './Login';
+import {Route} from 'react';
 
 
 class App extends Component{
@@ -9,6 +11,9 @@ class App extends Component{
                 <h1> Recipe Domain </h1>
                 <h1> Team Gyrados</h1>
             </div>
+            // <Route path="/login">
+            //     <Login />
+            // </Route>
         )
     }
 }
