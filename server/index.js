@@ -12,7 +12,7 @@ app.use(function (req, res, next) {
 
 
 app.get('/', (req, res) => {
-    recipe_model.getRecipes()
+    recipe_model.getUsers()
     .then(response => {
       res.status(200).send(response);
     })
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   })
   
 app.post('/recipes', (req, res) => {
-    recipe_model.createRecipes(req.body)
+    recipe_model.createUser(req.body)
     .then(response => {
         res.status(200).send(response);
     })
@@ -30,6 +30,17 @@ app.post('/recipes', (req, res) => {
         res.status(500).send(error);
         })
     })
+
+app.get('/userCount', (req, res) => {
+  recipe_model.getUserCount()
+    .then(response => {
+      res.status(200).send((response).toString());
+    })
+    .catch(error => {
+        res.status(500).send(error);
+    })
+})
+
 
 app.delete('/recipes/:id', (req, res) => {
     recipe_model.deleteRecipes(req.params.id)
@@ -40,7 +51,17 @@ app.delete('/recipes/:id', (req, res) => {
         res.status(500).send(error);
         })
     })
+  
+app.get('/users', (req, res) => {
+  recipe_model.getUsers()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
 
-app.listen(5000, () => {
-    console.log("Server listening to 5000");
+app.listen(3000, () => {
+    console.log("Server listening to 3000");
 })
