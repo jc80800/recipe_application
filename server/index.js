@@ -11,36 +11,25 @@ app.use(function (req, res, next) {
   });
 
 
-app.get('/', (req, res) => {
-    recipe_model.getUsers()
-    .then(response => {
-      res.status(200).send(response);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    })
+app.get('/recipes', (req, res) => {
+  recipe_model.getRecipes()
+  .then(response => {
+    res.status(200).send((response));
   })
+  .catch(error => {
+      res.status(500).send(error);
+  })
+})
   
-app.post('/recipes', (req, res) => {
-    recipe_model.createUser(req.body)
+app.post('/createRecipes', (req, res) => {
+    recipe_model.createRecipes(req.body)
     .then(response => {
         res.status(200).send(response);
     })
     .catch(error => {
         res.status(500).send(error);
         })
-    })
-
-app.get('/userCount', (req, res) => {
-  recipe_model.getUserCount()
-    .then(response => {
-      res.status(200).send((response).toString());
-    })
-    .catch(error => {
-        res.status(500).send(error);
-    })
 })
-
 
 app.delete('/recipes/:id', (req, res) => {
     recipe_model.deleteRecipes(req.params.id)
@@ -52,6 +41,16 @@ app.delete('/recipes/:id', (req, res) => {
         })
     })
   
+app.get('/userCount', (req, res) => {
+  recipe_model.getUserCount()
+    .then(response => {
+      res.status(200).send((response).toString());
+    })
+    .catch(error => {
+        res.status(500).send(error);
+    })
+})
+
 app.get('/users', (req, res) => {
   recipe_model.getUsers()
     .then(response => {
@@ -60,6 +59,26 @@ app.get('/users', (req, res) => {
     .catch(error => {
       res.status(500).send(error);
     })
+})
+
+app.get('/item', (req, res) => {
+  recipe_model.getItem()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+app.post('/createItem', (req, res) => {
+  recipe_model.createItem(req.body)
+  .then(response => {
+      res.status(200).send(response);
+  })
+  .catch(error => {
+      res.status(500).send(error);
+      })
 })
 
 app.listen(3000, () => {
