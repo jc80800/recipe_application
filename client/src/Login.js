@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
@@ -6,6 +6,7 @@ import "./Login.css";
 export default function Login(){
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [users, setUsers] = useState("");
   
     function validateForm() {
       return userName.length > 0 && password.length > 0;
@@ -26,11 +27,29 @@ export default function Login(){
         console.error(error.message);
       }
     }
+
+
+    useEffect(() => {
+      getUser();
+    }, []);
+
+    function getUser(){
+      fetch('http://localhost:30001/users')
+        .then(res => {
+          return res.text();
+        })
+        .then(data => {
+          setUsers(data);
+        });
+    }
+
+
   
     return (
       <div className="Login">
         <Form onSubmit={handleSubmit}>
         <h3>Login</h3>
+          {/* {users ? users : 'There is not user data available'} */}
           <Form.Group size="lg" controlId="userName">
             <Form.Label>User name</Form.Label>
             <Form.Control

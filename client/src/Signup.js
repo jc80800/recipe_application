@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
-
 // export default class SignUp extends Component {
   
   
@@ -111,9 +110,38 @@ import "./Login.css";
 export default function Signup(){
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [users, setUsers] = useState("");
 
   function validateForm() {
     return userName.length > 0 && password.length > 0;
+  }
+
+  function getUser(){
+    fetch('http://localhost:3000/users')
+    .then(response => {
+      return response.text();
+    })
+    .then(data => {
+      setUsers(data);
+    });
+  }
+
+
+  function createUser(){
+    try {
+      const response = fetch("http://localhost:3000/users", {
+        method: "POST", 
+        headers: {"Content-Type": "applicaton/json"},
+        body: JSON.stringify({users}),
+      });
+
+      const data = response.jason();
+      getUser(data);
+
+    }catch (error) {
+      console.error(error.message);
+    }
+
   }
 
   function handleSubmit(event) {
@@ -136,7 +164,7 @@ export default function Signup(){
     <div className="SignUp">
       <Form onSubmit={handleSubmit}>
       <h3>Sign Up</h3>
-        <Form.Group size="lg" controlId="userName">
+        <Form.Group size="lg" controlId="userName"> 
           <Form.Label>User name</Form.Label>
           <Form.Control
             autoFocus
