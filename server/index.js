@@ -61,6 +61,16 @@ app.get('/users', (req, res) => {
     })
 })
 
+app.post('/createUser', (req, res) => {
+  recipe_model.createUser(req.body)
+  .then(response => {
+      res.status(200).send(response);
+  })
+  .catch(error => {
+      res.status(500).send(error);
+      })
+})
+
 app.get('/item', (req, res) => {
   recipe_model.getItem()
     .then(response => {
