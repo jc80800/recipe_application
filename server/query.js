@@ -19,6 +19,17 @@ const getRecipes = () => {
   }) 
 }
 
+const getRecipeCount = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM "Recipe"', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(results.rowCount);
+    })
+  }) 
+} 
+
 const createRecipes = (body) => {
   return new Promise(function(resolve, reject) {
     const { id, name, description, servings, difficulty, steps, cooking_time, rating, username, date, categories, ingredients } = body
@@ -143,4 +154,5 @@ module.exports = {
   getUserCount,
   getItem,
   createItem,
+  getRecipeCount,
 }
