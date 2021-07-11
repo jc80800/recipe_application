@@ -1,9 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 // import { render } from "react-dom";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import './App.css';
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 export default function Dashboard(){
 
@@ -61,13 +58,16 @@ export default function Dashboard(){
 
     function createRecipe() {
         let name = prompt('Enter recipe name');
+        let description = prompt('Enter recipe description');
+        let steps = prompt('Enter recipe steps');
+        let times = prompt('Enter cooking time')
     
         fetch('http://localhost:3000/createRecipes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({name}),
+        body: JSON.stringify({name, description, steps, times}),
         })
         .then(response => {
             return response.text();
@@ -129,6 +129,11 @@ export default function Dashboard(){
                 {/* <th>Delete</th> */}
               </tr>
             </thead>
+            <tbody>
+                <tr>
+                    <th>{recipes.name} </th> 
+                </tr>
+            </tbody>
           </table>
         </Fragment>
       );
