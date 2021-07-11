@@ -1,16 +1,30 @@
 import React, { Component } from "react";
 import './App.css';
 
-export default class Dashboard extends Component{
-    
-    render(){
-        return(
-          <div class="row" className="mb-2 pageheading">
-            <div class="col-sm-12 btn btn-primary">
-                Dashboard 
-            </div>
-        </div>  
-        )
-    
-    };
+const DashBoard = () => {
+
+    const [recipes, setRecipes] =  useState([]);
+
+    const getRecipes= async() =>{
+        try {
+            const response = await fetch("http://localhost:3000/recipes");
+            const jsonData = await response.json();
+
+            setRecipes(jsonData);
+        } catch (error) {
+            console.error(err.message);
+        }
+    }
+
+    useEffect(() => {
+        getRecipes();
+      }, []);
+
+    console.log(recipes);
+
+    return(
+        
+    );
 }
+
+export default DashBoard;

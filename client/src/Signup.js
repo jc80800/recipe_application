@@ -1,35 +1,22 @@
 import React, { Component } from "react";
+// import { Fragment, useState, useEffect} from 'react';
+// import { render } from "react-dom";
 import './App.css';
 
 export default class SignUp extends Component {
+  
   
   constructor(){
     super();
     
     this.state = {
-      FirstName: '',
-      LastName: '',
       UserName: '',
       Password: '',
     }
 
-    this.FirstName = this.FirstName.bind(this);
-    this.LastName = this.LastName.bind(this);
     this.UserName = this.UserName.bind(this);
     this.Password = this.Password.bind(this);
     this.signUp = this.signUp.bind(this);
-  }
-
-  // FirstName(event){
-  //   this.setState({ this.FirstName: event.target.value})
-  // }
-
-  FirstName(event){
-    this.setState({FirstName: event.target.value})
-  }
-
-  LastName(event){
-    this.setState({LastName: event.target.value})
   }
 
   UserName(event){
@@ -41,16 +28,15 @@ export default class SignUp extends Component {
   }
 
 
-  signUp(event){
+  signUp(){
 
-    fetch('http://localhost:3000/Signup', {
+    fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        FirstName: this.state.FirstName,
-        LastName: this.state.LastName,
         UserName: this.state.UserName,
         Password: this.state.Password,
       })
@@ -65,18 +51,8 @@ export default class SignUp extends Component {
   
   render() {
     return (
-        <form>
+        <form onSubmit={this.signUp}>
           <h3>Sign Up</h3>
-
-          <div className="form-group">
-              <label>First name</label>
-              <input type="text" onChange={this.FirstName} placeholder="First name" />
-          </div>
-
-          <div className="form-group">
-              <label>Last name</label>
-              <input type="text" onChange={this.LastName} placeholder="Last name" />
-          </div>
 
           <div className="form-group">
               <label>Username </label>
@@ -88,10 +64,46 @@ export default class SignUp extends Component {
               <input type="password" onChange={this.Password} placeholder="Enter password" />
           </div>
 
-          <button onClick={this.signUp}>Sign up</button>
-          {/* <button type="submit" className="btn btn-primary btn-block">Sign Up</button> */}
+          <button onClick={this.signUp} className="btn btn-primary btn-block">Sign up</button>
         </form>
-    );
+    );   
   }    
 }
 
+
+// const SignUp = () => {
+//   const [description, setDescription] = useState("");
+
+//   const onSubmitForm = async e => {
+//     e.preventDefault();
+//     try {
+//       const body = { description };
+//       const response = await fetch("http://localhost:3000/users", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(body)
+//       });
+
+//       window.location = "/";
+//     } catch (err) {
+//       console.error(err.message);
+//     }
+//   };
+
+//   return (
+//     <Fragment>
+//       <h1 className="text-center mt-5">Pern Todo List</h1>
+//       <form className="d-flex mt-5" onSubmit={onSubmitForm}>
+//         <input
+//           type="text"
+//           className="form-control"
+//           value={description}
+//           onChange={e => setDescription(e.target.value)}
+//         />
+//         <button className="btn btn-success">Add</button>
+//       </form>
+//     </Fragment>
+//   );
+// };
+
+// export default SignUp;

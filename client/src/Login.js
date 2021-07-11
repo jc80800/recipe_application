@@ -71,8 +71,9 @@ export default class Login extends Component {
   }
 
   login(event){
-    debugger;
-    fetch('http://localhost:3000/Login', {
+    console.log(event)
+    
+    fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: {
         'Accept' : 'application/json',
@@ -83,19 +84,19 @@ export default class Login extends Component {
         Password: this.state.Password
       })
     }).then((Response) => Response.json())
-      .then((result) => {
-        console.log(result);
-        if(result.Status == 'Invalid')
-          alert('Invalid User')
-        else
+      .then((event) => {
+        console.log(event);
+        // if(result.Status == 'Invalid')
+        //   alert('Invalid User')
+        // else
           this.props.history.push("/Dashboard");
       })
   }
 
   render() {
     return (
-      <form>
-        <h3>Sign In</h3>
+      <form onSubmit={this.login}>
+        <h3>Login</h3>
 
         <div className="form-group">
             <label>Username</label>
@@ -106,13 +107,6 @@ export default class Login extends Component {
             <label>Password</label>
             <input type="password" onChange={this.Password} placeholder="Enter password" />
         </div>
-
-        {/* <div className="form-group">
-            <div className="custom-control custom-checkbox">
-                <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-            </div>
-        </div> */}
 
         <button onClick={this.login} className="btn btn-primary btn-block">Submit</button>
       </form>
