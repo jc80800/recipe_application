@@ -59,8 +59,15 @@ export default function Dashboard(){
     function createRecipe() {
         let name = prompt('Enter recipe name');
         let description = prompt('Enter recipe description');
+        let servings = prompt("enter serving");
+        let difficulty = prompt("tEasy, Easy-Medium, Medium, Medium-Hard, and Hard");
         let steps = prompt('Enter recipe steps');
-        let times = prompt('Enter cooking time')
+        let times = prompt('Enter cooking time');
+        let rating = prompt('enter rating');
+        let username = prompt("username");
+        let date = prompt("date");
+        let categories = prompt("categories");
+        let ingredients = prompt("ingredients");
     
         fetch('http://localhost:3000/createRecipes', {
         method: 'POST',

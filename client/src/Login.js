@@ -9,7 +9,9 @@ export default function Login(){
     const [users, setUsers] = useState("");
   
     function validateForm() {
-      return userName.length > 0 && password.length > 0;
+      getUser();
+      console.log(users);
+      // return userName.length > 0 && password.length > 0;
     }
   
     function handleSubmit(event) {
@@ -36,6 +38,7 @@ export default function Login(){
     function getUser(){
       fetch('http://localhost:3000/users')
         .then(res => {
+          console.log(res);
           return res.text();
         })
         .then(data => {
