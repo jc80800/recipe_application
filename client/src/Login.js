@@ -34,7 +34,7 @@ export default function Login(){
     }, []);
 
     function getUser(){
-      fetch('http://localhost:30001/users')
+      fetch('http://localhost:3000/users')
         .then(res => {
           return res.text();
         })

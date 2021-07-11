@@ -181,9 +181,10 @@ export default function Signup(){
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <button onclick={createUser}> Sign up</button>
+        {/* <Button block size="lg" type="submit" disabled={!validateForm()}>
           Sign up
-        </Button>
+        </Button> */}
       </Form>
     </div>
   );

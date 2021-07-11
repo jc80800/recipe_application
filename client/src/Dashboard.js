@@ -22,14 +22,13 @@ export default function Dashboard(){
     }
 
     function getRecipe(){
-        try {
-            const response = fetch('http://localhost:3000/recipes');
-            const jsonData = response.json();
-
-            setRecipes(jsonData);
-        } catch (error) {
-            console.error(error.message);
-        }
+        fetch('http://localhost:3000/recipes')
+        .then(response => {
+            return response.text();
+        })
+        .then(data => {
+            setRecipes(data);
+        });
     }
 
 //     function createRecipes(){
@@ -63,7 +62,7 @@ export default function Dashboard(){
     function createRecipe() {
         let name = prompt('Enter recipe name');
     
-        fetch('http://localhost:3000/recipes', {
+        fetch('http://localhost:3000/createRecipes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -122,31 +121,14 @@ export default function Dashboard(){
           <table class="table mt-5 text-center">
             <thead>
               <tr>
-                <th>Recipe</th>
+                {/* <th>Recipe</th> */}
                 {/* <th>Create</th> */}
                 <button onClick={createRecipe}>Add recipe</button>
+                <button onClick={getRecipe}>Show recipes</button>
                 {/* <button onClick={deleteRecipe}>Delete recipe</button> */}
                 {/* <th>Delete</th> */}
               </tr>
             </thead>
-            <tbody>
-              {recipes.map(recipe => (
-                <tr key={recipe.id}>
-                  <td>{recipe.name}</td>
-                  <td>
-                    {/* <EditTodo recipe={recipe} /> */}
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => deleteRecipe(recipe.id)}>
-                      Delete
-                    </button>
-                    
-                  </td>
-                </tr>
-              ))}
-            </tbody>
           </table>
         </Fragment>
       );
