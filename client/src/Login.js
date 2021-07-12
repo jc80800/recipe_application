@@ -73,6 +73,7 @@ export default function Login(){
           <Button block size="lg" type="submit" disabled={!validateForm()}>
             Login
           </Button>
+          {/* <button onClick={getUser}> Login</button> */}
         </Form>
       </div>
     );
