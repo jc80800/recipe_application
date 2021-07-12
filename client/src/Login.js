@@ -38,7 +38,6 @@ export default function Login(){
     function getUser(){
       fetch('http://localhost:3000/users')
         .then(res => {
-          console.log(res);
           return res.text();
         })
         .then(data => {
